@@ -5,4 +5,8 @@ function sum(a, b){
     return a + b;
 }
   
-console.log(sum(2, 2))
+document.write(sum(2, 2))
+
+let frutas = ["manzana", "banana", "durazno"]
+
+document.write(frutas[0])
