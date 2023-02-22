@@ -37,7 +37,6 @@ function obtenerUsuario(id) {
       });
 }
 
-// Llamamos a la función y manejamos la promesa con then y catch
 obtenerUsuario(1)
   .then(usuario => {
     console.log(usuario);
@@ -49,18 +48,16 @@ obtenerUsuario(1)
   async function obtenerUsuario2(id) {
     try {
       var response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)     
+
       if (response.ok) {
-        // Si la respuesta es exitosa, resolvemos la promesa con los datos del usuario
         return response.json();
+
       } else {
-        // Si hay un error en la respuesta, rechazamos la promesa con un mensaje de error
         throw new Error('Error al obtener usuario');
       }
     } catch (error) {
-      throw new Error('Error al obtener usuario');      
-    }
-          
-          // Si hay un error en la petición, rechazamos la promesa con un mensaje de error
+      throw error;      
+    }          
   }
   obtenerUsuario2(1)
   .then(usuario => {
