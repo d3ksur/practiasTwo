@@ -21,27 +21,48 @@ console.log(persona["nombre"])
 
 // Creamos una función que retorna una promesa
 function obtenerUsuario(id) {
-  return new Promise((resolve, reject) => {
-    // Hacemos una petición a la API para obtener la información del usuario
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+  return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then(response => {
         if (response.ok) {
           // Si la respuesta es exitosa, resolvemos la promesa con los datos del usuario
-          resolve(response.json());
+          return response.json();
         } else {
           // Si hay un error en la respuesta, rechazamos la promesa con un mensaje de error
-          reject('Error al obtener usuario');
+          throw new Error('Error al obtener usuario');
         }
       })
       .catch(error => {
         // Si hay un error en la petición, rechazamos la promesa con un mensaje de error
-        reject('Error en la petición');
+        throw new Error('Error al obtener usuario');
       });
-  });
 }
 
 // Llamamos a la función y manejamos la promesa con then y catch
 obtenerUsuario(1)
+  .then(usuario => {
+    console.log(usuario);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+  async function obtenerUsuario2(id) {
+    try {
+      var response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)     
+      if (response.ok) {
+        // Si la respuesta es exitosa, resolvemos la promesa con los datos del usuario
+        return response.json();
+      } else {
+        // Si hay un error en la respuesta, rechazamos la promesa con un mensaje de error
+        throw new Error('Error al obtener usuario');
+      }
+    } catch (error) {
+      throw new Error('Error al obtener usuario');      
+    }
+          
+          // Si hay un error en la petición, rechazamos la promesa con un mensaje de error
+  }
+  obtenerUsuario2(1)
   .then(usuario => {
     console.log(usuario);
   })
